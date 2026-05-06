@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primal Coherence</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* HOME-SPECIFIC */
+.hero{min-height:100vh;background:var(--jungle);display:flex;flex-direction:column;justify-content:center;padding:8rem 2.8rem 5rem;position:relative;overflow:hidden}
+.hero-blob{position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(ellipse,rgba(24,184,112,0.15) 0%,transparent 65%);pointer-events:none}
+.hero-blob2{position:absolute;bottom:-10%;left:-5%;width:40vw;height:40vw;border-radius:50%;background:radial-gradient(ellipse,rgba(168,216,32,0.08) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:860px}
+.hero-kicker{font-size:0.68rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--bright);margin-bottom:1.8rem;display:flex;align-items:center;gap:0.8rem;font-weight:400}
+.hero-kicker::before{content:'';width:28px;height:2px;background:var(--lime);border-radius:2px;display:block}
+.hero-h1{font-family:'Fraunces',serif;font-size:clamp(3.5rem,7vw,6.5rem);font-weight:300;line-height:1.0;color:var(--cream);margin-bottom:1.8rem;letter-spacing:-0.02em}
+.hero-h1 em{font-style:italic;color:var(--lime)}
+.hero-sub{font-size:1rem;line-height:1.9;color:var(--muted-light);max-width:500px;font-weight:300;margin-bottom:3rem}
+.hero-actions{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;margin-bottom:3.5rem}
+.btn-ghost-light{font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted-light);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.3s}
+.btn-ghost-light:hover{color:var(--cream)}
+.btn-ghost-light::after{content:'↓';color:var(--bright)}
+
+/* MOD GRID */
+.modalities-section{padding:5.5rem 2.8rem;background:var(--cream)}
+.mod-section-inner{max-width:1100px;margin:0 auto}
+.mod-group-label{font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:1.4rem;margin-top:3rem;font-weight:400;border-bottom:1px solid rgba(14,107,64,0.1);padding-bottom:0.6rem}
+.mod-group-label:first-of-type{margin-top:0}
+.mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.mod-grid-sm{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;max-width:680px}
+.mod-card{background:var(--white);border-radius:14px;padding:1.8rem 1.6rem;border:1.5px solid rgba(14,107,64,0.08);text-decoration:none;color:inherit;display:block;transition:all 0.3s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2.5px;background:linear-gradient(to right,var(--bright),var(--lime));opacity:0;transition:opacity 0.3s}
+.mod-card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(14,42,32,0.1);border-color:rgba(14,107,64,0.18)}
+.mod-card:hover::after{opacity:1}
+.mod-card-num{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:300;color:rgba(14,107,64,0.07);line-height:1;font-style:italic;margin-bottom:0.8rem}
+.mod-card-name{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:300;color:var(--jungle);margin-bottom:0.55rem;line-height:1.2}
+.mod-card-desc{font-size:0.81rem;line-height:1.75;color:var(--text-body);font-weight:300;margin-bottom:1rem}
+.mod-card-link{font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--emerald);display:flex;align-items:center;gap:0.4rem;transition:gap 0.3s}
+.mod-card:hover .mod-card-link{gap:0.7rem}
+.mod-card.addon{border-style:dashed;background:var(--cream)}
+.mod-badge{display:inline-block;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.18rem 0.6rem;background:rgba(240,160,48,0.12);color:var(--papaya);border-radius:100px;border:1px solid rgba(240,160,48,0.2);margin-bottom:0.6rem}
+
+/* ABOUT SNIPPET */
+.about-section{padding:5.5rem 2.8rem;background:var(--sand)}
+.about-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center}
+.about-img{border-radius:18px;background:linear-gradient(160deg,#d8f0d0,#b0e0c0);height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid rgba(14,107,64,0.1);position:relative}
+.about-img-text{font-family:'Fraunces',serif;font-style:italic;color:rgba(14,42,32,0.28);font-size:0.95rem;text-align:center;padding:2rem;line-height:1.6}
+.about-text .s-eye{color:var(--emerald)}
+.about-h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;color:var(--jungle);line-height:1.1;margin-bottom:1.2rem}
+.about-h2 em{font-style:italic;color:var(--emerald)}
+.about-p{font-size:0.88rem;line-height:1.9;color:var(--text-body);font-weight:300;margin-bottom:0.9rem}
+.about-certs{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.2rem 0 1.8rem}
+.cert-tag{font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.28rem 0.75rem;border:1px solid rgba(14,107,64,0.2);color:var(--muted);border-radius:100px}
+
+@media(max-width:768px){
+  .mod-grid{grid-template-columns:1fr 1fr}
+  .mod-grid-sm{grid-template-columns:1fr 1fr;max-width:100%}
+  .about-inner{grid-template-columns:1fr;gap:2.5rem}
+  .about-img{height:260px}
+}
+@media(max-width:500px){
+  .mod-grid{grid-template-columns:1fr}
+  .mod-grid-sm{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Primal <em>Coherence</em></a>
+  <ul class="nav-links">
+    <li><a class="active" href="index.html">Home</a></li>
+    <li><a href="modalities.html">Modalities</a></li>
+    <li><a href="faq.html">Q&amp;A</a></li>
+    <li><a href="affiliates.html">Affiliates</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book a Discovery Call</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-inner">
+    <p class="hero-kicker">Primal Coherence · DMV Area · Private Studio</p>
+    <h1 class="hero-h1">Your body already<br>knows the way<br><em>back to itself.</em></h1>
+    <p id="hero-sub" class="hero-sub">Root cause healing through body intelligence — working with the biofield, nervous system, and the emotional patterns that shape physical reality.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-lime">Book a 20-min Discovery Call</a>
+      <a href="modalities.html" class="btn-ghost-light">Explore modalities</a>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z" fill="#f0f5e0"/></svg>
+
+<!-- BOWL BANNER -->
+<div class="bowl-banner">
+  <p>Every session — regardless of modality — opens and closes with time in the <em>Genesis Bowl</em>.<br>It is how we arrive together, and how we seal what has been done.</p>
+</div>
+
+<!-- MODALITIES GRID -->
+<section class="modalities-section" id="modalities">
+  <div class="mod-section-inner">
+    <div class="reveal">
+      <span class="s-eye">What's offered</span>
+      <h2 class="s-h2" style="margin-bottom:0.5rem">Every modality. <em>Your pace.</em></h2>
+      <p class="s-p" style="max-width:540px;margin-bottom:2rem">Each session is one-on-one, from a private studio in the DMV area. Click any modality to go deeper.</p>
+    </div>
+
+    <span class="mod-group-label">Core sessions</span>
+    <div class="mod-grid reveal">
+      <a href="ert.html" class="mod-card">
+        <div class="mod-card-num">01</div>
+        <div class="mod-card-name">Emotional Release Technique</div>
+        <p class="mod-card-desc">Hands-on bodywork that goes to where the real work needs to happen — not in analysis, not in conversation, but in the tissue itself.</p>
+        <span class="mod-card-link">Learn more →</span>
+      </a>
+      <a href="biofield.html" class="mod-card">
+        <div class="mod-card-num">02</div>
+        <div class="mod-card-name">Biofield Tuning</div>
+        <p class="mod-card-desc">Your electromagnetic field carries a record of everything you've been through. This work locates the distortion and restores coherence.</p>
+        <span class="mod-card-link">Learn more →</span>
+      </a>
+      <a href="kambo.html" class="mod-card">
+        <div class="mod-card-num">03</div>
+        <div class="mod-card-name">Kambo</div>
+        <p class="mod-card-desc">Ancient Amazonian medicine with a biochemistry modern science is still working to understand. Rigorous. Profound. Not subtle.</p>
+        <span class="mod-card-link">Learn more →</span>
+      </a>
+      <a href="genesis-bowl.html" class="mod-card">
+        <div class="mod-card-num">04</div>
+        <div class="mod-card-name">Genesis Bowl</div>
+        <p class="mod-card-desc">A 36" crystal singing bowl you sit inside. The distinction from ordinary sound healing is not subtle — you are enclosed by the resonance, not in front of it.</p>
+        <span class="mod-card-link">Learn more →</span>
+      </a>
+      <a href="emotion-code.html" class="mod-card">
+        <div class="mod-card-num">05</div>
+        <div class="mod-card-name">Emotion &amp; Body Code</div>
+        <p class="mod-card-desc">Remote sessions that work with your subconscious to identify and permanently release trapped emotions and energetic imbalances.</p>
+        <span class="mod-card-link">Learn more →</span>
+      </a>
+    </div>
+
+    <span class="mod-group-label" style="margin-top:3.5rem">Ceremonial additions — complimentary with any session · standalone available</span>
+    <div class="mod-grid-sm reveal">
+      <a href="rape.html" class="mod-card addon">
+        <span class="mod-badge">Standalone · Complimentary add-on</span>
+        <div class="mod-card-name">Rapé</div>
+        <p class="mod-card-desc">Sacred Amazonian snuff used for grounding, energetic clearing, and arriving fully present before deeper work begins.</p>
+        <span class="mod-card-link">Learn more →</span>
+      </a>
+      <a href="sananga.html" class="mod-card addon">
+        <span class="mod-badge">Standalone · Complimentary add-on</span>
+        <div class="mod-card-name">Sananga</div>
+        <p class="mod-card-desc">Sacred Amazonian eye medicine that clears perception — physically and energetically — before or after deeper ceremony.</p>
+        <span class="mod-card-link">Learn more →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SNIPPET -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-img reveal">
+      <!-- Replace with: <img src="jane.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:16px"> -->
+      <p class="about-img-text">Your photo here</p>
+    </div>
+    <div class="about-text reveal">
+      <span class="s-eye">About Jane</span>
+      <h2 class="about-h2">A healing facilitator,<br>not a <em>healer</em></h2>
+      <p id="about-short-1" class="about-p">Jane is a healing facilitator certified in Kambo, ERT, Biofield Tuning, and Emotion &amp; Body Code. Her path to this work came through her own body — years of chronic illness, a late Lyme disease diagnosis, and the slow, hard work of healing herself.</p>
+      <p id="about-short-2" class="about-p">Every modality she offers found her before she ever offered it to anyone else.</p>
+      <div class="about-certs">
+        <span class="cert-tag">Kambo</span>
+        <span class="cert-tag">ERT</span>
+        <span class="cert-tag">Biofield Tuning</span>
+        <span class="cert-tag">Cymatic Harmony</span>
+        <span class="cert-tag">Emotion &amp; Body Code</span>
+      </div>
+      <a href="about.html" class="btn-outline-dark">Learn more about Jane →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDING SCALE -->
+<section class="scale-wrap">
+  <div class="scale-inner reveal">
+    <span class="scale-eye">Before we talk about pricing</span>
+    <blockquote class="scale-q">"I believe healing shouldn't only be available<br>to those who can <em>afford it.</em>"</blockquote>
+    <p id="scale-sub" class="scale-sub">A limited number of sliding scale spots are available each month.</p>
+    <p id="scale-note" class="scale-note">If cost is a barrier, reach out before you talk yourself out of it. We'll figure something out together.</p>
+    <a href="sms:+14432546762" class="btn-jungle">Text Jane to ask →</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="s-wrap" style="background:var(--sand)" id="stories">
+  <div class="s-inner-wide">
+    <div class="reveal">
+      <span class="s-eye">Client stories</span>
+      <h2 class="s-h2">What the body <em>remembers</em></h2>
+      <p class="s-p" style="margin-bottom:0;max-width:480px">Real words. Screenshots shared with permission.</p>
+    </div>
+    <div class="ss-grid">
+      <!-- Replace <div class="ss-ph">...</div> with <img src="screenshot-1.jpg" class="ss-img" alt="Client feedback"> -->
+      <div class="ss-slot reveal"><div class="ph-bar"></div><div class="ss-ph"><div class="ss-ph-icon">📱</div><div class="ss-ph-label">Add screenshot</div><div class="ss-ph-file">screenshot-1.jpg</div></div><div class="ss-cap"><div class="ss-cap-name">Client name</div><div class="ss-cap-loc">Virginia · ERT</div></div></div>
+      <div class="ss-slot reveal"><div class="ph-bar"></div><div class="ss-ph"><div class="ss-ph-icon">📱</div><div class="ss-ph-label">Add screenshot</div><div class="ss-ph-file">screenshot-2.jpg</div></div><div class="ss-cap"><div class="ss-cap-name">Client name</div><div class="ss-cap-loc">Maryland · Biofield Tuning</div></div></div>
+      <div class="ss-slot reveal"><div class="ph-bar"></div><div class="ss-ph"><div class="ss-ph-icon">📱</div><div class="ss-ph-label">Add screenshot</div><div class="ss-ph-file">screenshot-3.jpg</div></div><div class="ss-cap"><div class="ss-cap-name">Client name</div><div class="ss-cap-loc">DC · Kambo</div></div></div>
+      <div class="ss-slot reveal"><div class="ph-bar"></div><div class="ss-ph"><div class="ss-ph-icon">📱</div><div class="ss-ph-label">Add screenshot</div><div class="ss-ph-file">screenshot-4.jpg</div></div><div class="ss-cap"><div class="ss-cap-name">Client name</div><div class="ss-cap-loc">Virginia · Genesis Bowl</div></div></div>
+      <div class="ss-slot reveal"><div class="ph-bar"></div><div class="ss-ph"><div class="ss-ph-icon">📱</div><div class="ss-ph-label">Add screenshot</div><div class="ss-ph-file">screenshot-5.jpg</div></div><div class="ss-cap"><div class="ss-cap-name">Client name</div><div class="ss-cap-loc">Maryland · ERT</div></div></div>
+      <div class="ss-slot reveal"><div class="ph-bar"></div><div class="ss-ph"><div class="ss-ph-icon">📱</div><div class="ss-ph-label">Add screenshot</div><div class="ss-ph-file">screenshot-6.jpg</div></div><div class="ss-cap"><div class="ss-cap-name">Client name</div><div class="ss-cap-loc">DC · Emotion Code</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-wrap" id="booking">
+  <div class="booking-inner reveal">
+    <span class="booking-eye">Begin here</span>
+    <h2 class="booking-h2">Ready to come<br>back to <em>yourself?</em></h2>
+    <p id="booking-sub" class="booking-p">Book a free 20-minute discovery call. We'll talk about where you are and figure out together where to start.</p>
+    <p class="booking-p" style="font-size:0.78rem;margin-top:0.3rem">The easiest way to reach me is a text.</p>
+    <div class="booking-phone-wrap">
+      <a href="sms:+14432546762" class="booking-phone">(443) 254-6762</a>
+      <span class="booking-note">Text preferred · DMV area · By appointment</span>
+    </div>
+    <div class="booking-divider"></div>
+    <div class="booking-alt">
+      <a href="mailto:primalcoherence@gmail.com" class="btn-outline-light">Email Jane</a>
+      <a href="modalities.html" class="btn-outline-light">View all modalities</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <a href="index.html" class="ft-logo">Primal <em>Coherence</em></a>
+    <p class="ft-tag">Root cause healing through body intelligence.<br>DMV Area · Private studio · By appointment.<br>(443) 254-6762 · Text preferred<br>primalcoherence@gmail.com</p>
+  </div>
+  <div class="ft-col">
+    <h4>Modalities</h4>
+    <ul>
+      <li><a href="ert.html">ERT</a></li>
+      <li><a href="biofield.html">Biofield Tuning</a></li>
+      <li><a href="kambo.html">Kambo</a></li>
+      <li><a href="genesis-bowl.html">Genesis Bowl</a></li>
+      <li><a href="emotion-code.html">Emotion &amp; Body Code</a></li>
+      <li><a href="rape.html">Rapé</a></li>
+      <li><a href="sananga.html">Sananga</a></li>
+    </ul>
+  </div>
+  <div class="ft-col">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="about.html">About Jane</a></li>
+      <li><a href="faq.html">Q&amp;A</a></li>
+      <li><a href="affiliates.html">Affiliates</a></li>
+      <li><a href="#booking">Book a call</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="ft-copy">© 2025 Primal Coherence · All rights reserved</div>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('in'),i*70)})},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script>
+const ham=document.getElementById("hamburger");
+const drawer=document.getElementById("navDrawer");
+if(ham&&drawer){
+  ham.addEventListener("click",()=>{
+    ham.classList.toggle("open");
+    drawer.classList.toggle("open");
+    document.body.style.overflow=drawer.classList.contains("open")?"hidden":"";
+  });
+  drawer.querySelectorAll("a").forEach(a=>{
+    a.addEventListener("click",()=>{
+      ham.classList.remove("open");
+      drawer.classList.remove("open");
+      document.body.style.overflow="";
+    });
+  });
+}
+</script>
+
+<script>
+fetch('_content/home.json').then(r=>r.json()).then(d=>{
+  const set=(id,val)=>{const el=document.getElementById(id);if(el)el.innerHTML=val};
+  set('hero-h1', d.hero_heading.replace('back to itself.','back to itself.<br><em>back to itself.</em>'));
+  document.querySelectorAll('.hero-h1').forEach(el=>{
+    el.innerHTML='Your body already<br>knows the way<br><em>back to itself.</em>';
+  });
+  set('hero-sub', d.hero_sub);
+  set('about-short-1', d.about_short);
+  set('about-short-2', d.about_short_2);
+  set('scale-quote', '“'+d.scale_quote+'”');
+  set('scale-sub', d.scale_sub);
+  set('scale-note', d.scale_note);
+  const bh=document.getElementById('booking-h2-text');
+  if(bh)bh.textContent=d.booking_heading;
+  set('booking-sub', d.booking_sub);
+}).catch(()=>{});
+</script>
+</body>
+</html>

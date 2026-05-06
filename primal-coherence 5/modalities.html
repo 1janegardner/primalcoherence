@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modalities · Primal Coherence</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.mod-grid-sm{display:grid;grid-template-columns:repeat(2,1fr);gap:1.3rem;max-width:680px}
+.mod-card{background:var(--white);border-radius:14px;padding:1.9rem 1.7rem;border:1.5px solid rgba(14,107,64,0.08);text-decoration:none;color:inherit;display:block;transition:all 0.3s;position:relative;overflow:hidden}
+.mod-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2.5px;background:linear-gradient(to right,var(--bright),var(--lime));opacity:0;transition:opacity 0.3s}
+.mod-card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(14,42,32,0.1);border-color:rgba(14,107,64,0.18)}
+.mod-card:hover::after{opacity:1}
+.mod-card-num{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:300;color:rgba(14,107,64,0.07);line-height:1;font-style:italic;margin-bottom:0.8rem}
+.mod-card-name{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:300;color:var(--jungle);margin-bottom:0.55rem;line-height:1.2}
+.mod-card-desc{font-size:0.81rem;line-height:1.75;color:var(--text-body);font-weight:300;margin-bottom:1rem}
+.mod-card-link{font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--emerald);display:flex;align-items:center;gap:0.4rem;transition:gap 0.3s}
+.mod-card:hover .mod-card-link{gap:0.7rem}
+.mod-card.addon{border-style:dashed;background:var(--cream)}
+.mod-badge{display:inline-block;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.18rem 0.6rem;background:rgba(240,160,48,0.12);color:var(--papaya);border-radius:100px;border:1px solid rgba(240,160,48,0.2);margin-bottom:0.6rem}
+.group-label{font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:1.4rem;margin-top:3.5rem;font-weight:400;border-bottom:1px solid rgba(14,107,64,0.1);padding-bottom:0.6rem}
+.group-label:first-of-type{margin-top:0}
+@media(max-width:768px){.mod-grid{grid-template-columns:1fr 1fr}.mod-grid-sm{grid-template-columns:1fr 1fr;max-width:100%}}
+@media(max-width:500px){.mod-grid{grid-template-columns:1fr}.mod-grid-sm{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Primal <em>Coherence</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a class="active" href="modalities.html">Modalities</a></li>
+    <li><a href="faq.html">Q&amp;A</a></li>
+    <li><a href="affiliates.html">Affiliates</a></li>
+  </ul>
+  <a href="index.html#booking" class="nav-cta">Book a Discovery Call</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<section class="page-hero">
+  <div class="page-hero-blob"></div>
+  <div class="page-hero-blob2"></div>
+  <div class="page-hero-inner">
+    <p class="page-kicker">What's offered</p>
+    <h1 class="page-h1">Every modality.<br><em>Your pace.</em></h1>
+    <p class="page-intro">All sessions are one-on-one, from a private studio in the DMV area. Every session opens and closes with time in the Genesis Bowl.</p>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z" fill="#f0f5e0"/></svg>
+
+<section class="s-wrap">
+  <div class="s-inner-wide">
+    <span class="group-label">Core sessions</span>
+    <div class="mod-grid reveal">
+      <a href="ert.html" class="mod-card"><div class="mod-card-num">01</div><div class="mod-card-name">Emotional Release Technique</div><p class="mod-card-desc">Hands-on bodywork that goes to where the real work needs to happen — not in analysis, not in conversation, but in the tissue itself.</p><span class="mod-card-link">Learn more →</span></a>
+      <a href="biofield.html" class="mod-card"><div class="mod-card-num">02</div><div class="mod-card-name">Biofield Tuning</div><p class="mod-card-desc">Your electromagnetic field carries a record of everything you've been through. This work locates the distortion and restores coherence.</p><span class="mod-card-link">Learn more →</span></a>
+      <a href="kambo.html" class="mod-card"><div class="mod-card-num">03</div><div class="mod-card-name">Kambo</div><p class="mod-card-desc">Ancient Amazonian medicine with a biochemistry modern science is still working to understand. Rigorous. Profound. Not subtle.</p><span class="mod-card-link">Learn more →</span></a>
+      <a href="genesis-bowl.html" class="mod-card"><div class="mod-card-num">04</div><div class="mod-card-name">Genesis Bowl</div><p class="mod-card-desc">A 36" crystal singing bowl you sit inside. The distinction from ordinary sound healing is not subtle — you are enclosed by the resonance, not in front of it.</p><span class="mod-card-link">Learn more →</span></a>
+      <a href="emotion-code.html" class="mod-card"><div class="mod-card-num">05</div><div class="mod-card-name">Emotion &amp; Body Code</div><p class="mod-card-desc">Remote sessions that work with your subconscious to identify and permanently release trapped emotions and energetic imbalances.</p><span class="mod-card-link">Learn more →</span></a>
+    </div>
+    <span class="group-label">Ceremonial additions — complimentary with any session · standalone available</span>
+    <div class="mod-grid-sm reveal">
+      <a href="rape.html" class="mod-card addon"><span class="mod-badge">Standalone · Complimentary add-on</span><div class="mod-card-name">Rapé</div><p class="mod-card-desc">Sacred Amazonian snuff used for grounding, energetic clearing, and arriving fully present before deeper work begins.</p><span class="mod-card-link">Learn more →</span></a>
+      <a href="sananga.html" class="mod-card addon"><span class="mod-badge">Standalone · Complimentary add-on</span><div class="mod-card-name">Sananga</div><p class="mod-card-desc">Sacred Amazonian eye medicine that clears perception — physically and energetically — before or after deeper ceremony.</p><span class="mod-card-link">Learn more →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="scale-wrap">
+  <div class="scale-inner reveal">
+    <span class="scale-eye">Before we talk about pricing</span>
+    <blockquote class="scale-q">"I believe healing shouldn't only be available<br>to those who can <em>afford it.</em>"</blockquote>
+    <p class="scale-sub">A limited number of sliding scale spots are available each month.</p>
+    <p class="scale-note">If cost is a barrier, reach out before you talk yourself out of it. We'll figure something out together.</p>
+    <a href="sms:+14432546762" class="btn-jungle">Text Jane to ask →</a>
+  </div>
+</section>
+
+<section class="booking-wrap">
+  <div class="booking-inner reveal">
+    <span class="booking-eye">Begin here</span>
+    <h2 class="booking-h2">Not sure where<br>to <em>start?</em></h2>
+    <p class="booking-p">Book a free 20-minute discovery call. We'll figure out together which modality fits where you are right now.</p>
+    <div class="booking-phone-wrap">
+      <a href="sms:+14432546762" class="booking-phone">(443) 254-6762</a>
+      <span class="booking-note">Text preferred · DMV area · By appointment</span>
+    </div>
+    <div class="booking-divider"></div>
+    <div class="booking-alt"><a href="mailto:primalcoherence@gmail.com" class="btn-outline-light">Email Jane</a></div>
+  </div>
+</section>
+
+<footer>
+  <div><a href="index.html" class="ft-logo">Primal <em>Coherence</em></a><p class="ft-tag">Root cause healing through body intelligence.<br>DMV Area · Private studio · By appointment.<br>(443) 254-6762 · Text preferred<br>primalcoherence@gmail.com</p></div>
+  <div class="ft-col"><h4>Modalities</h4><ul><li><a href="ert.html">ERT</a></li><li><a href="biofield.html">Biofield Tuning</a></li><li><a href="kambo.html">Kambo</a></li><li><a href="genesis-bowl.html">Genesis Bowl</a></li><li><a href="emotion-code.html">Emotion &amp; Body Code</a></li><li><a href="rape.html">Rapé</a></li><li><a href="sananga.html">Sananga</a></li></ul></div>
+  <div class="ft-col"><h4>Navigate</h4><ul><li><a href="about.html">About Jane</a></li><li><a href="faq.html">Q&amp;A</a></li><li><a href="affiliates.html">Affiliates</a></li><li><a href="index.html#booking">Book a call</a></li></ul></div>
+</footer>
+<div class="ft-copy">© 2025 Primal Coherence · All rights reserved</div>
+<script>const io=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('in'),i*70)})},{threshold:0.07});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));</script>
+<script>
+const ham=document.getElementById("hamburger");
+const drawer=document.getElementById("navDrawer");
+if(ham&&drawer){
+  ham.addEventListener("click",()=>{
+    ham.classList.toggle("open");
+    drawer.classList.toggle("open");
+    document.body.style.overflow=drawer.classList.contains("open")?"hidden":"";
+  });
+  drawer.querySelectorAll("a").forEach(a=>{
+    a.addEventListener("click",()=>{
+      ham.classList.remove("open");
+      drawer.classList.remove("open");
+      document.body.style.overflow="";
+    });
+  });
+}
+</script>
+</body>
+</html>
